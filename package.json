@@ -1,0 +1,17 @@
+{
+"name": "discordbot2",
+"version": "1.0.0",
+"description": "test test",
+"main": "index.js",
+"scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1"
+},
+"author": "Konrado Moreno",
+"license": "ISC",
+"dependencies": {
+  "@discordjs/opus": "^0.3.2",
+  "cron": "^1.8.2",
+  "discord.js": "^12.3.1",
+  "ytdl-core": "^3.4.0"
+}
+}
