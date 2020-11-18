@@ -4,7 +4,7 @@ const ytdl = require('ytdl-core');
 const cron= require('cron');
 const superagent = require('superagent');
 
-client.login('NzY1OTg0MzY0ODE0NTMyNjU5.X4cwhw.0N__zWKZZu3pbhPWY3kJkwexhek');
+client.login('NzY1OTg0MzY0ODE0NTMyNjU5.X4cwhw.IT6PUB6FNLza2AVd411eEC2HXUs');
 client.on("ready", () => {
 
 
@@ -12,27 +12,41 @@ client.on("ready", () => {
  
 })    
 
-  let scheduledBarka = new cron.CronJob('00 21 21 * * *', () => {
-    client.guilds.cache.forEach((guild)=>{
+  let scheduledBarka = new cron.CronJob('00 37 21 * * *', () => {
+    client.guilds.cache.forEach( (guild) =>{
       var chx = guild.channels.cache.filter(ch => ch.type ==='voice').random();
      
       try{ 
         chx.join().then(connection => {
-        const stream = ytdl('https://youtu.be/1dOt_VcbgyA', { filter: 'audioonly' });
-        const dispatcher = connection.play(stream); 
-        dispatcher.on('finish', () => chx.leave());
+        const stream = ytdl('https://youtu.be/1dOt_VcbgyA', { filter: 'audioonly' }).on("error", e => {
+          console.error(e);
+          message.channel.send("Error Occured during streaming YouTube.\n");
+        });
+        
+        let dispatcher = connection.play(stream);
+        message.channel.send("B");
+        
+        dispatcher.on("end-of-stream", e =>{
+          voiceChannel.leave();
+        });
        })
       }
       catch{
 
+
       }
-    finally{
-        chx = guild.channels.cache.filter(ch => ch.type ==='voice').random();
+      finally{
         chx.join().then(connection => {
-        const stream = ytdl('https://youtu.be/1dOt_VcbgyA', { filter: 'audioonly' });
-        const dispatcher = connection.play(stream);
-        dispatcher.on('finish', () => chx.leave());
-      })
+          const stream = ytdl('https://youtu.be/1dOt_VcbgyA', { filter: 'audioonly' }).on("error", e => {
+            console.error(e);
+            message.channel.send("Error Occured during streaming YouTube.\n");
+          });
+          let dispatcher = connection.play(stream);
+          message.channel.send("B");
+          dispatcher.on("end-of-stream", e =>{
+            voiceChannel.leave();
+          });
+         })
      }
     })
       client.guilds.cache.forEach((guild)=>{
@@ -45,7 +59,7 @@ client.on("ready", () => {
        }
 
       })
-    // defaultChannel.send("21 37 barka time"); //send it to whatever channel the bot has permissions to send on
+     defaultChannel.send("21 37 barka time"); //send it to whatever channel the bot has permissions to send on
     })
 
   
