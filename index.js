@@ -4,7 +4,7 @@ const ytdl = require('ytdl-core');
 const cron= require('cron');
 const superagent = require('superagent');
 
-client.login('NzY1OTg0MzY0ODE0NTMyNjU5.X4cwhw.IT6PUB6FNLza2AVd411eEC2HXUs');
+client.login('Tutej token twojego bota);
 client.on("ready", () => {
 
 
